@@ -8,6 +8,42 @@ same_location = 3
 # unique for Covid-19
 physical_distancing = 4
 
+
+class Student:
+    def __init__(self, name, email, interests, wants_portfolio_review):
+        self._name = name
+        self._email = email
+        self._interests = interests
+        self._wants_portfolio_review = wants_portfolio_review
+
+    def get_name(self):
+        return self._name
+
+    def get_email(self):
+        return self._email
+
+    def get_info(self):
+        return {
+            "name": self._name,
+            "email": self._email,
+            "interests": self._interests,
+            "wants_portfolio_review": self._wants_portfolio_review
+        }
+
+
+# setup Pair  Class
+class Pair:
+    def __init__(self, upper_year, incoming_student):
+        self._u_y = upper_year
+        self._i_s = incoming_student
+
+    def get_pair(self):
+        return {
+            "incoming_student": self._i_s,
+            "upper_year": self._u_y
+        }
+
+
 # read from file
 data = pd.read_csv('/Users/sammyrobens-paradise/projects/resume-critique-matching/responses.csv')
 
