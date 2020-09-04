@@ -44,6 +44,7 @@ class Pair:
         }
 
 
+PairList = []
 # read from file
 data = pd.read_csv('/Users/sammyrobens-paradise/projects/resume-critique-matching/responses.csv')
 
@@ -100,4 +101,7 @@ upper_year_research_students = upper_year_students.loc[
 upper_year_general_students = upper_year_students.loc[
     upper_year_students['Resume types you would like to have critiqued or critique'].str.contains('General')]
 
-# IN PROGRESS
+for index, row in upper_year_design_students.iterrows():
+    upperYearStudent = Student(row['Full Name'], row['Email Address'],
+                               row['Resume types you would like to have critiqued or critique'], row[
+                                   'Would you also like a website/portfolio critique or feel comfortable critiquing website/portfolios? '])
