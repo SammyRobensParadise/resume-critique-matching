@@ -9,6 +9,12 @@ same_location = 3
 physical_distancing = 4
 
 
+# @returns
+def portfolio_critique_frame(df):
+    return df.loc[df[
+                      'Would you also like a website/portfolio critique or feel comfortable critiquing website/portfolios?'] == 'Yes']
+
+
 class Student:
     def __init__(self, name, email, interests, wants_portfolio_review):
         self._name = name
@@ -44,7 +50,9 @@ class Pair:
         }
 
 
-PairList = []
+UpperYearDesignList = []
+IncomingDesignList = []
+
 # read from file
 data = pd.read_csv('/Users/sammyrobens-paradise/projects/resume-critique-matching/responses.csv')
 
@@ -101,7 +109,16 @@ upper_year_research_students = upper_year_students.loc[
 upper_year_general_students = upper_year_students.loc[
     upper_year_students['Resume types you would like to have critiqued or critique'].str.contains('General')]
 
-for index, row in upper_year_design_students.iterrows():
-    upperYearStudent = Student(row['Full Name'], row['Email Address'],
-                               row['Resume types you would like to have critiqued or critique'], row[
-                                   'Would you also like a website/portfolio critique or feel comfortable critiquing website/portfolios? '])
+# incoming_design_students = incoming_design_students.add_prefix('Incoming ')
+# design_students = [upper_year_design_students, incoming_design_students]
+# combined_design_students = pd.concat(design_students)
+
+
+incoming_design_students_with_portfolio = portfolio_critique_frame(incoming_design_students)
+upper_year_design_students_with_portfolio = portfolio_critique_frame(upper_year_design_students)
+
+incoming_design_students_with_portfolio = incoming_design_students_with_portfolio.add_prefix("Incoming ")
+design_students = pd.concat([upper_year_design_students_with_portfolio, incoming_design_students_with_portfolio])
+
+with pd.option_context('display.max_rows', None, 'display.max_columns', None):  # more options can be specified also
+    print(design_students)
