@@ -109,10 +109,6 @@ upper_year_research_students = upper_year_students.loc[
 upper_year_general_students = upper_year_students.loc[
     upper_year_students['Resume types you would like to have critiqued or critique'].str.contains('General')]
 
-# incoming_design_students = incoming_design_students.add_prefix('Incoming ')
-# design_students = [upper_year_design_students, incoming_design_students]
-# combined_design_students = pd.concat(design_students)
-
 # add design prefixes
 incoming_design_students_with_portfolio = portfolio_critique_frame(incoming_design_students)
 upper_year_design_students_with_portfolio = portfolio_critique_frame(upper_year_design_students)
@@ -121,13 +117,20 @@ upper_year_design_students_with_portfolio = portfolio_critique_frame(upper_year_
 incoming_design_students_with_portfolio = incoming_design_students_with_portfolio.add_prefix("Incoming ")
 design_students = pd.concat([upper_year_design_students_with_portfolio, incoming_design_students_with_portfolio])
 
-# add product student
+# add product prefixes
 incoming_product_students_with_portfolio = portfolio_critique_frame(incoming_product_students)
 upper_year_product_students_with_portfolio = portfolio_critique_frame(upper_year_product_students)
 
 # add Incoming Product
 incoming_product_students_with_portfolio = incoming_design_students_with_portfolio.add_prefix("Incoming")
 product_students = pd.concat([upper_year_product_students_with_portfolio, incoming_product_students_with_portfolio])
+
+#
+incoming_software_students_with_portfolio = portfolio_critique_frame(incoming_software_students)
+upper_year_software_students_with_portfolio = portfolio_critique_frame(upper_year_software_students)
+
+
+
 
 with pd.option_context('display.max_rows', None, 'display.max_columns', None):  # more options can be specified also
     print(design_students)
