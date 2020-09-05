@@ -113,12 +113,22 @@ upper_year_general_students = upper_year_students.loc[
 # design_students = [upper_year_design_students, incoming_design_students]
 # combined_design_students = pd.concat(design_students)
 
-
+# add design prefixes
 incoming_design_students_with_portfolio = portfolio_critique_frame(incoming_design_students)
 upper_year_design_students_with_portfolio = portfolio_critique_frame(upper_year_design_students)
 
+# add Incoming Design
 incoming_design_students_with_portfolio = incoming_design_students_with_portfolio.add_prefix("Incoming ")
 design_students = pd.concat([upper_year_design_students_with_portfolio, incoming_design_students_with_portfolio])
 
+# add product student
+incoming_product_students_with_portfolio = portfolio_critique_frame(incoming_product_students)
+upper_year_product_students_with_portfolio = portfolio_critique_frame(upper_year_product_students)
+
+# add Incoming Product
+incoming_product_students_with_portfolio = incoming_design_students_with_portfolio.add_prefix("Incoming")
+product_students = pd.concat([upper_year_product_students_with_portfolio, incoming_product_students_with_portfolio])
+
 with pd.option_context('display.max_rows', None, 'display.max_columns', None):  # more options can be specified also
     print(design_students)
+    print(product_students)
